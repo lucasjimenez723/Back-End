@@ -4,10 +4,13 @@ const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const {engine} = require('express-handlebars');
 const vistaRoutes = require('./routes/vistasRoutes');
+const sessionsRoutes = require('./routes/sessionsRoutes')
 const path = require('path');
 const connectDB = require('./db'); 
 const session = require('express-session')
 const {Server} = require('socket.io')
+const initPassport = require('./config/passport.config.js');
+const passport = require('passport');
 
 const PORT = 8080;
 
@@ -25,17 +28,19 @@ app.use(session(
     }
 ))
 
+//paso numero 2, inicializo en el app.js
+initPassport()
+app.use(passport.initialize())
+app.use(passport.session()) //solo si usamos sesiones
+
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname,'/views'));
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 
 app.use('/api/products', productRoutes);
@@ -44,6 +49,7 @@ app.use('/carts', cartRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/', vistaRoutes);
 app.use('/realtimeproducts', vistaRoutes);
+app.use('/api/sessions', sessionsRoutes)
 
 app.get('*', (req, res) => {
     res.status(404).send("error 404, not found.");
