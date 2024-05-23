@@ -1,48 +1,20 @@
-const productModels = require('./models/productModels.js');
+const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate-v2')
 
-class ProductMongoDAO {
-    constructor() {
-        
-    }
+const productSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: String,
+    code: { type: String, required: true, unique: true },
+    price: { type: Number, required: true },
+    status: { type: String, required: true },
+    stock: { type: Number, required: true },
+    category: String,
+    thumbnails: [String],
+    createdAt: { type: Date, default: Date.now }
+});
 
+productSchema.plugin(paginate)
 
-    async addProduct(product) {
-        return await productModels.create(product);
-    }
+const Product = mongoose.model('Product', productSchema);
 
-    async getAllProducts() {
-        return await productModels.aggregate(
-            [
-                {
-                    $group:{
-                        _id: "$category"
-                    }
-                }
-            ]
-        )
-    }
-
-    async getProductById(id) {
-        return await productModels.findById(id).lean();
-    }
-    
-    async updateProduct(id, modificacion) {
-        try {
-            return await productModels.findByIdAndUpdate(id, modificacion, { new: true });
-        } catch (error) {
-            console.error('Error al actualizar producto:', error);
-            throw error;
-        }
-    }
-    
-
-    async deleteProductById(id) {
-       return await productModels.findByIdAndDelete(id);
-    }
-
-
-    
-}
-
-
-module.exports = ProductMongoDAO;
+module.exports = Product;

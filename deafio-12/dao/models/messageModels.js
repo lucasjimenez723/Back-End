@@ -1,28 +1,11 @@
-const Message = require('./models/messageModels.js');
+const mongoose = require('mongoose');
 
-class MessageManager {
-    constructor() {
-        
-    }
+const messageSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
+    text: { type: String, required: true }, 
+    createdAt: { type: Date, default: Date.now } 
+});
 
-    async addMessage(messageData) {
-        try {
-            return await Message.create(messageData);
-        } catch (error) {
-            console.error('Error al agregar mensaje:', error);
-            throw error;
-        }
-    }
+const Message = mongoose.model('Message', messageSchema);
 
-    async getAllMessages() {
-        try {
-            return await Message.find({});
-        } catch (error) {
-            console.error('Error al obtener todos los mensajes:', error);
-            throw error;
-        }
-    }
-
-}
-
-module.exports = MessageManager;
+module.exports = Message;
