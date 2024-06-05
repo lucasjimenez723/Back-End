@@ -1,0 +1,36 @@
+const express = require('express');
+const { generateMockProducts } = require('../utils/mockProducts');
+const ProductMongoDAO = require('../dao/productMongoDAO');
+
+const router = express.Router();
+
+// Endpoint para obtener productos mock
+router.get('/mockingproducts', async (req, res) => {
+  const mockProducts = generateMockProducts();
+  res.json(mockProducts);
+});
+
+// Endpoint para crear un producto
+router.post('/addproduct', async (req, res, next) => {
+  const productDao = new ProductMongoDAO();
+  const { title, description, code, price, status, stock, category, thumbnails, createdAt } = req.body;
+
+  try {
+    const newProduct = await productDao.addProduct({
+      title,
+      description,
+      code,
+      price,
+      status,
+      stock,
+      category,
+      thumbnails,
+      createdAt
+    });
+    res.json({ message: 'Producto creado satisfactoriamente', product: newProduct });
+  } catch (error) {
+    next({ type: 'invalidProductData', error: error.message });
+  }
+});
+
+module.exports = router;
