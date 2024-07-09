@@ -40,6 +40,22 @@ components:
         _id: ObjectId("60acc54545c8e82e0475f73a")
         description: Martillo
         code: A0324z
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongoDB
+        description: 
+          type: string
+          description: Descripcion del carrito.
+        code: 
+          type: string
+          description: Codigo del carrito
+        example: 
+          _id: ObjectId("60acc54545c8e82e0475f73a")
+          description: Carrito
+          code: A032154z
   requestBodies:
     createUser:
       type: object

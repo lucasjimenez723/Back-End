@@ -48,58 +48,15 @@ paths:
         description: id del usuario que se está solicitando
         schema:
           type: string
-      # - name: Authorization
-      #   in: header
-      #   required: true
-      #   description: Token de autenticación
-      #   schema:
-      #     type: string            
+      - name: Authorization
+        in: header
+        required: true
+        description: Token de autenticación
+        schema:
+          type: string            
       responses:
         "200":
           description: Recupera un usuario de la DB, según el uid que enviamos en la ruta como parámetro
-components:
-  schemas:
-    User:
-      type: object
-      properties:
-        _id:
-          type: ObjectId
-          description: Id autogenerado de mongo
-        first_name:
-          type: string
-          description: Nombre del usuario
-        last_name:
-          type: string
-          description: Apellido...    
-        email:
-          type: string
-          description: Correo electronico
-        password: 
-          type: string
-          description: contraseña de acceso  
-      example:
-        _id: ObjectId("60acc54545c8e82e0475f73a")
-        first_name: Diego
-        last_name: Polverelli
-        email: diegopolverelli@hotmail.com
-        password: "123"
-    Products:
-      type: object
-      properties:
-        _id:
-          type: ObjectId
-          description: Id autogenerado de mongo
-        description:
-          type: string
-          description: Descripcion del producto
-        code:
-          type: string
-          description: Codigo del producto    
-      example:
-        _id: ObjectId("60acc54545c8e82e0475f73a")
-        description: Martillo
-        code: A0324z
-  requestBodies:
     createUser:
       type: object
       properties:

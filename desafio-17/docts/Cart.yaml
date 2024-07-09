@@ -1,15 +1,12 @@
 paths:
-  /api/products/:
+  /api/carts/:
     get:
-      security:
-        - basicAuth: []
-        - bearerAuth: []
-      summary: Obtiene todos los productos
+      summary: Obtiene todos los carritos
       tags:
-        - Products
+        - Carts
       responses:
         "200":
-          description: Los productos fueron obtenidos OK desde la DB
+          description: Los carritos fueron obtenidos OK desde la DB
           content:
             application/json:
               schema:
@@ -17,22 +14,20 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Lista de productos"
-                  productos:
+                    example: "Lista de carritos"
+                  carritos:
                     type: array
                     items:
-                      $ref: '#components/schemas/Products'
+                      $ref: '#components/schemas/Carts'
         # "500":
         #   description: Error interno del servidor
     post:
-      security:
-        - bearerAuth: []
-      summary: Graba un nuevo producto
+      summary: Genera un nuevo carrito
       tags:
-        - Products
+        - Carts
       responses:
         "201":
-          description: Producto creado correctamente
+          description: Carrito creado correctamente
           content:
             application/json:
               schema:
@@ -40,10 +35,10 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Ejemplo de un producto:"
+                    example: "Ejemplo de un carrito:"
                   productos:
                     type: array
                     items:
-                      $ref: '#components/schemas/Products'
+                      $ref: '#components/schemas/Carts'
         "500":
           description: Error interno del servidor
