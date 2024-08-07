@@ -1,0 +1,27 @@
+<h1>Lista de productos</h1>
+{{#if welcomeMessage}}
+    <p>{{welcomeMessage}}</p>
+{{/if}}
+
+<ul>
+    {{#each products}}
+    <li>
+        <a href="/products/{{this._id}}">{{this.title}}</a>
+    </li>
+    <li>{{description}}</li>
+    <li>$ {{price}}</li>
+    <hr>
+    {{/each}}
+</ul>
+
+{{>menu}}
+
+{{#if hasPrevPage}}
+    <a href="/products?pagina={{prevPage}}">Pag.Ant.</a>
+{{/if}}
+
+{{#if hasNextPage}}
+    <a href="/products?pagina={{nextPage}}">Pag.Sig.</a>
+{{/if}}
+
+<a href="/products?pagina={{totalPages}}">Ult. Pag.</a>

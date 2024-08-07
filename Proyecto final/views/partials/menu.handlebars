@@ -1,0 +1,32 @@
+<ul>
+    <li>
+        <a href="/">Home</a>
+    </li>
+    <li>
+        <a href="/register">Registro</a>
+    </li>
+    {{#unless isAuthenticated}}
+        <li>
+            <a href="/login">Login</a>
+        </li>
+    {{/unless}}
+    <li>
+        <a href="/products">Productos</a>
+    </li>
+    {{#if isAuthenticated}}
+        <li>
+            <a href="/api/sessions/logout">Logout</a>
+        </li>
+        {{#if isAdmin}}
+            <li>
+                <a href="/admin">Admin</a>
+            </li>
+        {{/if}}
+    {{/if}}
+    {{#if isAuthenticated}}
+        <li><a href="/cart/{{cartId}}">Carrito</a></li>
+    {{/if}}
+    <li>
+        <a href="/profile">Perfil</a>
+    </li>
+</ul>
