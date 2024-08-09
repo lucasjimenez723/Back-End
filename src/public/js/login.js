@@ -17,4 +17,4 @@ form.addEventListener('submit', e => {
             window.location.replace('/products')   
         }
     })
-})  
+})

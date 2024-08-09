@@ -19,3 +19,4 @@ export default {
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     NODE_ENV: environment 
 };
+

@@ -23,3 +23,4 @@ export const mailingController = async(req,res) =>{
         attachments:[]
     })
 }
+

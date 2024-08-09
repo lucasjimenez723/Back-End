@@ -28,7 +28,7 @@ switch (config.PERSISTENCE) {
     break;
 
     case 'FILE_SYSTEM':
-        const {default:CartsFS} = await import('./managersFileSystem/CartManager2.js');
+        const {default:CartsFS} = await import('./managersFileSystem/CartManager.js');
         const {default:ProductsFS} = await import('./managersFileSystem/ProductManager.js');
         const {default:UsersFS} = await import('./managersFileSystem/UserManager.js');
         const {default:TicketsFS} = await import('./managersFileSystem/TicketManager.js');
